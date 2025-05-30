@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Cadastro</h2>
+          
+          <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nome"
+                formControlName="nome"
+                [class.is-invalid]="cadastroForm.get('nome')?.invalid && cadastroForm.get('nome')?.touched"
+              >
+              <div class="invalid-feedback" *ngIf="cadastroForm.get('nome')?.errors?.['required']">
+                Nome é obrigatório
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                [class.is-invalid]="(cadastroForm.get('email')?.invalid || emailEmUso) && cadastroForm.get('email')?.touched"
+              >
+              <div class="invalid-feedback" *ngIf="cadastroForm.get('email')?.errors?.['required']">
+                Email é obrigatório
+              </div>
+              <div class="invalid-feedback" *ngIf="cadastroForm.get('email')?.errors?.['email']">
+                Email inválido
+              </div>
+              <div class="invalid-feedback" *ngIf="emailEmUso">
+                Este email já está em uso
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="senha" class="form-label">Senha</label>
+              <div class="input-group">
+                <input
+                  [type]="showSenha ? 'text' : 'password'"
+                  class="form-control"
+                  id="senha"
+                  formControlName="senha"
+                  [class.is-invalid]="cadastroForm.get('senha')?.invalid && cadastroForm.get('senha')?.touched"
+                >
+                <button 
+                  class="btn btn-outline-secondary" 
+                  type="button"
+                  (click)="toggleSenha()"
+                >
+                  <fa-icon [icon]="showSenha ? faEyeSlash : faEye"></fa-icon>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="cadastroForm.get('senha')?.errors?.['required']">
+                Senha é obrigatória
+              </div>
+              <div class="invalid-feedback" *ngIf="cadastroForm.get('senha')?.errors?.['minlength']">
+                A senha deve ter pelo menos 6 caracteres
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmarSenha" class="form-label">Confirmar Senha</label>
+              <div class="input-group">
+                <input
+                  [type]="showConfirmarSenha ? 'text' : 'password'"
+                  class="form-control"
+                  id="confirmarSenha"
+                  formControlName="confirmarSenha"
+                  [class.is-invalid]="cadastroForm.errors?.['senhasDiferentes'] && cadastroForm.get('confirmarSenha')?.touched"
+                >
+                <button 
+                  class="btn btn-outline-secondary" 
+                  type="button"
+                  (click)="toggleConfirmarSenha()"
+                >
+                  <fa-icon [icon]="showConfirmarSenha ? faEyeSlash : faEye"></fa-icon>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="cadastroForm.errors?.['senhasDiferentes']">
+                As senhas não coincidem
+              </div>
+            </div>
+
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="termos"
+                formControlName="termos"
+                [class.is-invalid]="cadastroForm.get('termos')?.invalid && cadastroForm.get('termos')?.touched"
+              >
+              <label class="form-check-label" for="termos">
+                Eu concordo com os termos de uso
+              </label>
+              <div class="invalid-feedback" *ngIf="cadastroForm.get('termos')?.errors?.['required']">
+                Você precisa aceitar os termos de uso
+              </div>
+            </div>
+
+            <div class="alert alert-success" *ngIf="cadastroSucesso">
+              Cadastro realizado com sucesso! Redirecionando...
+            </div>
+
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="cadastroForm.invalid || emailEmUso"
+              >
+                Cadastrar
+              </button>
+            </div>
+
+            <div class="text-center mt-3">
+              <a routerLink="/login">Já tem uma conta? Faça login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

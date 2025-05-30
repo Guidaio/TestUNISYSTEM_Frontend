@@ -1,0 +1,88 @@
+<div class="page-container">
+  <div class="container">
+    <div class="visualizacao-content">
+      <div class="header">
+        <h2>Dados da Empresa</h2>
+        <button class="btn-primary" (click)="editarEmpresa()">
+          Editar
+        </button>
+      </div>
+
+      <div class="info-section">
+        <h3>Informações Gerais</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Tipo da Empresa</label>
+            <span>{{ empresaData.tipoEmpresa }}</span>
+          </div>
+          <div class="info-item">
+            <label>Nome da Empresa</label>
+            <span>{{ empresaData.nomeEmpresa }}</span>
+          </div>
+          <div class="info-item">
+            <label>CNPJ</label>
+            <span>{{ empresaData.cnpj }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Endereço</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>CEP</label>
+            <span>{{ empresaData.cep }}</span>
+          </div>
+          <div class="info-item">
+            <label>Endereço</label>
+            <span>{{ empresaData.endereco }}</span>
+          </div>
+          <div class="info-item">
+            <label>Bairro</label>
+            <span>{{ empresaData.bairro }}</span>
+          </div>
+          <div class="info-item">
+            <label>Cidade</label>
+            <span>{{ empresaData.cidade }}</span>
+          </div>
+          <div class="info-item">
+            <label>Estado</label>
+            <span>{{ empresaData.estado }}</span>
+          </div>
+          <div class="info-item">
+            <label>Complemento</label>
+            <span>{{ empresaData.complemento }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Contato</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Celular</label>
+            <span>{{ empresaData.celular }}</span>
+          </div>
+          <div class="info-item">
+            <label>Email</label>
+            <span>{{ empresaData.email }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Administrador</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Nome do Administrador</label>
+            <span>{{ empresaData.nomeAdm }}</span>
+          </div>
+          <div class="info-item">
+            <label>CPF</label>
+            <span>{{ empresaData.cpf }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

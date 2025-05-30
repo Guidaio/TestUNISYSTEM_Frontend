@@ -1,0 +1,22 @@
+<div class="app-container">
+  <!-- Sidebar -->
+  <div class="sidebar" [class.active]="isLoggedIn">
+    <div class="sidebar-header">
+      <h3>UniSystem</h3>
+      <div class="user-info" *ngIf="isLoggedIn">
+        <span class="user-name">{{ nomeUsuario }}</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a routerLink="/home" routerLinkActive="active" [class.disabled]="!empresaCadastrada">Home</a>
+      <a routerLink="/visualizacao" routerLinkActive="active" [class.disabled]="!empresaCadastrada">Cadastro da empresa</a>
+      <a routerLink="/perfil" routerLinkActive="active" [class.disabled]="!empresaCadastrada">Meu Perfil</a>
+      <a (click)="logout()" class="logout-link">Sair</a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" [class.sidebar-active]="isLoggedIn">
+    <router-outlet></router-outlet>
+  </div>
+</div>

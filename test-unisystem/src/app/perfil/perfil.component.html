@@ -1,0 +1,96 @@
+<div class="page-container">
+  <div class="container">
+    <div class="perfil-content">
+      <h2>Meu Perfil</h2>
+      
+      <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+        <div class="info-section">
+          <h3>Informações Pessoais</h3>
+          <div class="info-grid">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" formControlName="nome" class="form-control" readonly>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" formControlName="email" class="form-control" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h3>Alterar Senha</h3>
+          <div class="info-grid">
+            <div class="form-group">
+              <label for="senhaAtual">Senha Atual</label>
+              <div class="password-input">
+                <input [type]="showSenhaAtual ? 'text' : 'password'" 
+                       id="senhaAtual" 
+                       formControlName="senhaAtual"
+                       class="form-control"
+                       readonly>
+                <button type="button" class="toggle-password" (click)="toggleSenhaAtual()">
+                  <fa-icon [icon]="showSenhaAtual ? faEyeSlash : faEye" size="lg"></fa-icon>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="perfilForm.get('senhaAtual')?.errors?.['senhaIncorreta']">
+                Senha atual incorreta
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="novaSenha">Nova Senha</label>
+              <div class="password-input">
+                <input [type]="showNovaSenha ? 'text' : 'password'" 
+                       id="novaSenha" 
+                       formControlName="novaSenha"
+                       class="form-control"
+                       [class.is-invalid]="perfilForm.get('novaSenha')?.errors?.['required'] && perfilForm.get('novaSenha')?.touched">
+                <button type="button" class="toggle-password" (click)="toggleNovaSenha()">
+                  <fa-icon [icon]="showNovaSenha ? faEyeSlash : faEye" size="lg"></fa-icon>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="perfilForm.get('novaSenha')?.errors?.['required'] && perfilForm.get('novaSenha')?.touched">
+                Nova senha é obrigatória
+              </div>
+              <div class="invalid-feedback" *ngIf="perfilForm.get('novaSenha')?.errors?.['minlength'] && perfilForm.get('novaSenha')?.touched">
+                A senha deve ter no mínimo 6 caracteres
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmarSenha">Confirmar Nova Senha</label>
+              <div class="password-input">
+                <input [type]="showConfirmarSenha ? 'text' : 'password'" 
+                       id="confirmarSenha" 
+                       formControlName="confirmarSenha"
+                       class="form-control"
+                       [class.is-valid]="senhasCombinam"
+                       [class.is-invalid]="!senhasCombinam && perfilForm.get('confirmarSenha')?.value">
+                <button type="button" class="toggle-password" (click)="toggleConfirmarSenha()">
+                  <fa-icon [icon]="showConfirmarSenha ? faEyeSlash : faEye" size="lg"></fa-icon>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="perfilForm.get('confirmarSenha')?.errors?.['required'] && perfilForm.get('confirmarSenha')?.touched">
+                Confirmação de senha é obrigatória
+              </div>
+              <div class="invalid-feedback" *ngIf="!senhasCombinam && perfilForm.get('confirmarSenha')?.value">
+                As senhas não coincidem
+              </div>
+              <div class="valid-feedback" *ngIf="senhasCombinam">
+                ✓ As senhas são compatíveis
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" [disabled]="perfilForm.invalid || !senhasCombinam">
+            Salvar Alterações
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 
